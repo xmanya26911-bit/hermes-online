@@ -20,13 +20,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-# Edge deps first (better layer cache).
+# Edge deps first (better layer cache). Pins match hermes-agent v0.21.0.
 COPY backend/requirements.txt backend/requirements.txt
 RUN pip install --upgrade pip && pip install -r backend/requirements.txt
 
-# Real Hermes agent from upstream. Pin to a tag/SHA for reproducible deploys,
-# e.g. git+https://github.com/NousResearch/hermes-agent.git@v0.21.0[all]
-RUN pip install "git+https://github.com/NousResearch/hermes-agent.git[all]"
+# Real Hermes agent from upstream (pinned tag for reproducible deploys).
+# [web] = serve dashboard deps; core already brings the agent loop,
+# OpenAI-compatible transports (opencode-zen) and file/shell tools.
+RUN pip install "hermes-agent[web] @ git+https://github.com/NousResearch/hermes-agent.git@v0.21.0"
 
 COPY backend/ backend/
 RUN chmod +x backend/start.sh
