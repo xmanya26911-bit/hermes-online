@@ -109,7 +109,7 @@ git push -u origin main
 ### 2. Render backend (Blueprint)
 
 1. Render dashboard → **New → Blueprint** → select the repo (uses `render.yaml`).
-   OrKeep manual alternative: **New → Web Service** → Docker, `dockerfilePath ./backend/Dockerfile`, `dockerContext .`.
+   OrKeep manual alternative: **New → Web Service** → Docker, repo root context, default `Dockerfile`.
 2. Plan: **Standard** (≥1GB RAM recommended for agent + tools).
 3. Disk: blueprint creates `hermes-data` 10GB mounted at `/data`
    (`HERMES_HOME=/data/.hermes`, workspace `/data/workspace`). These exact dirs
@@ -229,9 +229,9 @@ npm run dev                  # http://localhost:3000
 ## Production commands
 
 ```bash
-# Pin a Hermes release in backend/Dockerfile before going live, e.g.:
-#   RUN pip install "git+https://github.com/NousResearch/hermes-agent.git@v0.21.0[all]"
-docker build -f backend/Dockerfile -t hermes-online:local .
+# Pin a Hermes release in Dockerfile before going live, e.g.:
+#   RUN pip install "hermes-agent[web] @ git+https://github.com/NousResearch/hermes-agent.git@v2026.8.31"
+docker build -t hermes-online:local .
 docker run --rm -p 8000:8000 \
   -e PORT=8000 -e ENV=production \
   -e HERMES_AUTH_TOKEN=local-test-token-0123456789abcdef \
