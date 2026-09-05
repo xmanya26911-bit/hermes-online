@@ -27,7 +27,7 @@ RUN pip install --upgrade pip && pip install -r backend/requirements.txt
 # Real Hermes agent from upstream (pinned tag for reproducible deploys).
 # [web] = serve dashboard deps; core already brings the agent loop,
 # OpenAI-compatible transports (opencode-zen) and file/shell tools.
-RUN pip install "hermes-agent[web] @ git+https://github.com/NousResearch/hermes-agent.git@v0.21.0"
+RUN pip install "hermes-agent[web] @ git+https://github.com/NousResearch/hermes-agent.git@v2026.8.31"
 
 COPY backend/ backend/
 RUN chmod +x backend/start.sh
