@@ -5,7 +5,7 @@ services:
   - type: web
     name: hermes-backend
     runtime: docker
-    dockerfilePath: ./backend/Dockerfile
+    dockerfilePath: ./Dockerfile
     dockerContext: .
     plan: standard # min 1GB RAM recommended for Hermes agent + tools
     healthCheckPath: /api/health
