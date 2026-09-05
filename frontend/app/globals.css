@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #0a0e14;
+}
+
+/* Markdown body inside assistant bubbles */
+.prose-hermes {
+  @apply break-words text-slate-100;
+}
+.prose-hermes p {
+  @apply my-1.5;
+}
+.prose-hermes ul,
+.prose-hermes ol {
+  @apply my-1.5 list-outside space-y-0.5 pl-5;
+}
+.prose-hermes ul {
+  @apply list-disc;
+}
+.prose-hermes ol {
+  @apply list-decimal;
+}
+.prose-hermes h1,
+.prose-hermes h2,
+.prose-hermes h3,
+.prose-hermes h4 {
+  @apply mb-1 mt-3 font-semibold text-white;
+}
+.prose-hermes table {
+  @apply my-2 w-full border-collapse text-[12.5px];
+}
+.prose-hermes th,
+.prose-hermes td {
+  @apply border border-ink-700 px-2 py-1;
+}
+.prose-hermes blockquote {
+  @apply my-2 border-l-2 border-accent-600 pl-3 text-slate-300;
+}
+.prose-hermes .hljs {
+  background: transparent;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f2c40;
+  border-radius: 8px;
+  border: 2px solid #0a0e14;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}

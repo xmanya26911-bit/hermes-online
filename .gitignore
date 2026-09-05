@@ -1,0 +1,33 @@
+# ---- secrets & local ----
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend/.env.local
+frontend/.env.production.local
+
+# ---- hermes runtime (never commit) ----
+.data/
+*.db
+*.db-wal
+*.db-shm
+
+# ---- python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ---- node / next ----
+node_modules/
+frontend/.next/
+frontend/out/
+frontend/dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# ---- misc ----
+.DS_Store
+Thumbs.db
+*.log
+C:\Users\xmany\AppData\Local\Temp\opencode/

@@ -1,0 +1,11 @@
+# Render Docker build context is the repo root.
+.git
+.gitignore
+frontend/node_modules
+frontend/.next
+frontend/out
+__pycache__
+*.pyc
+.env
+.env.local
+C:\Users\xmany\AppData\Local\Temp\opencode

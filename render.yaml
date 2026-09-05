@@ -1,0 +1,40 @@
+# Render blueprint: https://render.com/docs/blueprint-spec
+# Create via dashboard (New -> Blueprint -> this repo) or `render blueprint launch`.
+# Persistent disk at /data keeps sessions/memory/skills/config across restarts.
+services:
+  - type: web
+    name: hermes-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    plan: standard # min 1GB RAM recommended for Hermes agent + tools
+    healthCheckPath: /api/health
+    autoDeploy: true
+    disk:
+      name: hermes-data
+      mountPath: /data
+      sizeGB: 10
+    envVars:
+      - key: ENV
+        value: production
+      - key: HERMES_MODEL
+        value: muse-spark-1.3-contributor-free
+      - key: HERMES_PROVIDER
+        value: opencode-zen
+      - key: OPENCODE_ZEN_BASE_URL
+        value: https://opencode.ai/zen/v1
+      - key: HERMES_HOME
+        value: /data/.hermes
+      - key: HERMES_WORKSPACE
+        value: /data/workspace
+      - key: HERMES_PORT
+        value: 12719
+      - key: FRONTEND_ORIGIN
+        value: https://hermesonline.vercel.app
+      # --- set in Render dashboard (secrets, never commit) ---
+      - key: OPENCODE_ZEN_API_KEY
+        sync: false
+      - key: HERMES_AUTH_TOKEN
+        sync: false
+      - key: HERMES_DASHBOARD_SESSION_TOKEN
+        sync: false # optional: if unset the edge generates one at boot
