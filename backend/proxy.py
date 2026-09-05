@@ -121,10 +121,17 @@ _http = httpx.AsyncClient(timeout=httpx.Timeout(60.0, connect=10.0))
 
 
 def _hermes_bin() -> str:
+    explicit = (os.getenv("HERMES_BIN", "") or "").strip()
+    if explicit and Path(explicit).exists():
+        return explicit
     found = shutil.which("hermes")
     if found:
         return found
-    # Managed installs (install.sh / Docker) put it on PATH via venv; fall back to module.
+    # Render image layout: hermes venv created by `uv sync` in /opt/hermes-src.
+    for candidate in ("/opt/hermes-src/.venv/bin/hermes",):
+        if Path(candidate).exists():
+            return candidate
+    # Last resort: module invocation (requires hermes importable by this interpreter).
     return ""
 
 
